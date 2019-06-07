@@ -2,6 +2,6 @@
 
 Web application of a quiz game for a university project, Avignon University 2018-2019
 
-Developped with AngularJS and ExpressJS.
+Developped in Full JS with AngularJS on front and ExpressJS on back.
 
 NinoFares.
