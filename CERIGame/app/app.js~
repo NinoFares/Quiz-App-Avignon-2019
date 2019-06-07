@@ -1,0 +1,6 @@
+var jeuBC = angular.module('jeuBC',[]);
+jeuBC.controller('BC_controlleur',BC_controlleur);
+jeuBC.service('accessDataService',accessDataService);
+jeuBC.service('auth',authService);
+//jeuBC.service('session',sessionService);
+//jeuBC.factory('socket', treatSocket);

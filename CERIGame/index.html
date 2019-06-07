@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+     <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>Ceri Game</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.32.2/dist/sweetalert2.all.min.js"></script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+     <script src="app/services/service.js"></script>
+      <script src="app/controllers/controller.js"></script>
+     <script src="app/app.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/style.css">
+
+  </head>
+
+  <body ng-app="jeuBC">
+
+
+      <!--          Partie Login              -->
+     <div class="text-center" ng-controller="BC_login_controlleur" ng-show ="afficher_login">
+          <!-- Bandeau authentification -->
+          <div class="barre2" ng-show="afficher2"> {{msg_erreur}}
+               <button type="button" class="close" ng-click="onClose()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+               </button>
+          </div>
+          <!-- Formulaire de connexion -->
+         	<div class="border modal-dialog modal-login">
+         		<div class="modal-content">
+         			<div class="modal-header">
+         				<h4 class="modal-title">CERI Game</h4>
+         			</div>
+         			<div class="modal-body">
+         				<form ng-submit="login1()">
+         					<div class="form-group">
+         						<i class="fa fa-user"></i>
+                                       <input type="text" name="pseudo" ng-model="username" id="pseudo" class="form-control" placeholder="Identifiant" required autofocus>
+         					</div>
+         					<div class="form-group">
+         						<i class="fa fa-lock"></i>
+                                       <input type="password" name="password" ng-model="password" class="form-control" placeholder="Mot de passe" required>
+         					</div>
+         					<div class="form-group">
+         						<input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">
+         					</div>
+         				</form>
+         			</div>
+         		</div>
+         </div>
+     </div>
+
+
+
+     <!--           Partie Jeu          -->
+     <div  ng-controller="BC_jeu_controlleur" ng-show="afficher_jeu">
+          <div class="barre" ng-show="afficher"> {{msg_succes}}
+               <button type="button" class="close" ng-click="onClose2()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+               </button>
+          </div>
+          <!-- TODO: Arranger les classes -->
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+              <a class="navbar-brand" href="#">CERI Game</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#" ng-click="button_quiz()">Quiz
+                      <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" ng-click="button_profile()">Profil</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" ng-click="button_classement()">Classement</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" ng-click="logout()">Déconnection</a>
+                 </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+
+          <!-- Partie Quiz -->
+          <div ng-show="afficher_quiz" class="container tbd tbd_quiz text-center" ng-controller="BC_quiz_controlleur">
+               <img src="quiz.png" alt="Quiz" class="img-main">
+               <!-- Formulaire Jeu -->
+                  <form ng-show="afficher_form_quiz" class="container col-lg-offset-1 form-horizontal">
+                    Jouez ! Choisisez un théme et un niveau:</br><br>
+                    <div class="form-group">
+                         <label class="sr-only" for="liste_theme">Théme : </label>
+                         <select class="form-control input-lg" id="liste_theme" name="liste_theme" ng-model="theme_choisi" required autofocus>
+                              <option disabled value="" selected hidden>choisissez un théme</option>
+                              <option ng-repeat="theme in themes" value="{{theme}}">{{theme}}</option>
+                         </select>
+                    </div>
+                    <div class="form-group">
+                         <label class="sr-only" for="niveau_theme">Niveau : </label>
+                         <select class="form-control input-lg" id="niveau_theme" name="niveau_theme" ng-model="niveau_choisi" required>
+                              <option disabled value="" selected hidden>choisissez un niveau</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                         </select>
+                    </div><br>
+                    <button class="btn btn-primary btn-lg" ng-click="jouer()">Jouer</button>
+                  </form>
+
+               <!-- Partie Question -->
+               <div class="container" name="question_div" ng-show="afficher_question">
+                    <div name="chrono">Temps de jeu :
+                         <span name="minute" ng-bind="minute"></span>:
+                         <span name="seconde" ng-bind="seconde"></span>
+                    </div>
+                    <span>Réponse correcte : </span>
+                      <span name="score" ng-bind="score"></span><br><br><br>
+                      <span name=question ng-bind="question"></span><br><br>
+                    <div class=" reponses_radio">
+                         <div class="btn-group btn-group-justified" role="group"  ng-repeat="reponse in reponses">
+                              <button class="btn btn-default btn-lg" name="id_button" ng-click=" onClick(reponse,reponse_correct)">{{reponse}}</button>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="container" name="resultat" ng-show="afficher_resultat">
+                 <h1>Quiz terminé !! Votre résultat et de : <span ng-bind="score_total"></span></h1><br>
+                  <h2 ng-bind="resultat_defi_score" ng-show="!afficher_button_defi"></h2>
+                 <h2 ng-bind="resultat_defi" ng-show="!afficher_button_defi"></h2>
+                 <button type="button" class="btn btn-primary btn-lg" ng-click="rejouer()" name="button">Rejouez !</button>
+                 <button type="button" class="btn btn-primary btn-lg" ng-click="defier()" ng-show="afficher_button_defi" name="button">Défier un joueur</button>
+                 <br><br>
+                 <div class="form-group" ng-show="afficher_users_defi">
+                      <label class="sr-only" for="liste_users">Users : </label>
+                      <select class="form-control input-lg" id="liste_users" name="liste_users" ng-model="user_choisi" required autofocus>
+                           <option disabled value="" selected hidden>choisissez un utilisateur</option>
+                           <option ng-repeat="user in users" value="{{$index}}">
+                                <span>{{user.id}} - </span>
+                                <span>{{user.nom}}</span>
+                                &nbsp;<span>{{user.prenom}}</span>
+                                <!-- &nbsp;<span ng-if="{user.statut === 1}">(Connecté)</span>
+                                &nbsp;<span ng-if="{user.statut === 0}">(Déconnecté)</span> -->
+                           </option>
+                      </select>
+                      <br>
+                      <button type="button" name="button" class="btn btn-primary btn-lg" ng-click="confirm_defier()">Défier !</button>
+                 </div>
+               </div>
+
+              <div class="user_connected" ng-show="afficher_users_connected">
+               <h3> Utilisateurs connectés </h3>
+                <div class=" btn-group-users btn-group btn-group-lg" ng-repeat="user_connected in users_connected">
+                <button class="button_users btn btn-default">
+                 <span class="fas fa-circle"></span>&nbsp;
+                 <span ng-bind="user_connected.nom"></span>&nbsp;
+                 <span ng-bind="user_connected.prenom"></span>
+                </button>
+               </div>
+             </div>
+
+             <div class="div_defi" ng-show="afficher_defi_lancee">
+                  <h3> Défis a relevé </h3>
+                  <div class="container">
+                    <div class=" btn-group-users btn-group btn-group-lg" ng-repeat="defi in defis">
+                    <button class="button_defi btn btn-default" ng-click="selection_defi(defi)"> Défi de
+                     <span ng-bind="defi.userDefiantNom"></span>&nbsp;
+                     <span ng-bind="defi.userDefiantPrenom"></span>
+                    </button>
+                   </div>
+               </div>
+            </div>
+          </div>
+
+
+          <!-- Partie profile -->
+          <div ng-show="afficher_profile" ng-controller="BC_profile_controlleur">
+               <div class="tbd tbd_profile container text-center">
+                    <div class="container">
+                         <figure>
+                              <img src="{{avatar}}" alt="avatar du user" id="img-circle"><br>&nbsp;<i ng-click="modifier_avatar()" class="fas fa-edit"></i>
+                         </figure>
+                         <h2><strong ng-bind="nom"></strong> <span ng-bind="prenom"></span></h2><i ng-click="modifier_nom()" class="fas fa-edit"></i><br><br>
+                         <h4>Identifiant : <span ng-bind="identifiant"></span></h4>
+                         <p ><strong>A/C status: </strong><span class="tags" id="user-status">Active</span></p>
+                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divider text-center"></div><br>
+                         <div class="row">
+                              <div class="col-lg-6 left">
+                                   <h6><p><strong ng-bind="date_de_naissance"></strong></p><!-- <i ng-click="modifier_date()" class="fas fa-edit"></i> --></h6>
+                                   <p><small class="label label-success">Date de naissance : </small></p>
+                              </div>
+                              <div class=" col-lg-6 right">
+                                   <h6><p><strong ng-bind="dereniere_connex"></strong></p></h6>
+                                   <p> <small class="label label-warning">Date de derniere connexion</small></p>
+                              </div>
+                         </div>
+                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divider text-center"></div><br>
+                         <div class="row">
+                              <div class="col-lg-6 left">
+                                   <h4><p><strong ng-bind="nbr_jeu"></strong></p></h4>
+                                   <p><small class="label label-success">Nombre de parties jouée</small></p>
+                              </div>
+                              <div class=" col-lg-6 right">
+                                   <h4><p><strong ng-bind="meilleure_score"></strong></p></h4>
+                                   <p> <small class="label label-warning">Meilleure scores :</small></p>
+                              </div>
+                         </div>
+                    </div>
+                    <br><br><br>
+                    <div class="container">
+                         <div class="row" >
+                              <h3>Historique :</h3>
+                        </div>
+                        <div class="container-hist">
+                             <div class="row">
+                                  <div class="col-lg-3">
+                                       <h6><strong>Date : </strong></h6>
+                                  </div>
+                                  <div class="col-lg-3">
+                                       <h6><strong>Reponses correcte :</strong></h6>
+                                  </div>
+                                  <div class="col-lg-3">
+                                       <h6><strong>Score : </strong></h6>
+                                  </div>
+                                  <div class="col-lg-3">
+                                       <h6><strong>Temps : </strong></h6>
+                                  </div><br>
+                             </div>
+                              <div class="row" ng-repeat="line in result">
+                                   <div class="col-lg-3">
+                                        <span ng-bind="line.date | date:'dd/MM/yyyy hh:mm'"></span>
+                                   </div>
+                                   <div class="col-lg-3">
+                                      <span ng-bind="line.nbreponse"></span>
+                                </div>
+                                <div class="col-lg-3">
+                                     <span ng-bind="line.score"></span>
+                                </div>
+                                <div class="col-lg-3">
+                                     <span ng-bind="line.temps"></span>
+                                </div>
+                           </div>
+                      </div>
+                 </div>
+            </div>
+       </div>
+
+
+
+          <!-- Partie classement -->
+          <div ng-show="afficher_classement" ng-controller="BC_classement_controlleur"></div>
+
+     </div>
+     <footer class="footer">
+          <div class="container">
+               <p>by Bouzid Fares et Cadi Hamza.</p>
+          </div>
+     </footer>
+
+
+
+
+</body>
+
+</html>

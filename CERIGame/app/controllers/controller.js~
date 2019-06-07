@@ -1,0 +1,21 @@
+function BC_controlleur($scope){
+	/**
+	* Traite le formulaire de connexion
+	*@returns nothing
+	*/
+	// $scope.pseudo = null;
+	 //$scope.password= null;
+	 
+	 $scope.login1 = function(){
+		 console.log("Passage par controlleur");
+		  // appel au service d'authentification
+	 	auth.logIn($scope.username,$scope.password).then(function(data){
+			alert('isLoggedIn: '+auth.isLoggedIn());
+			//$scope.bandeauDisplay('Connexion réussie');
+		},()=>{console.log("Erreur controlleur");});
+	}
+	/*socket.on('notification',function(data){
+		alert('controleur - socket.on => '+data);
+		$scope.bandeauDisplay('Message du serveur '+data);
+	});*/
+}

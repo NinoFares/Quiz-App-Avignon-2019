@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+   <script src="app/services/service.js"></script>
+    <script src="app/controllers/controller.js"></script>
+   <script src="app/app.js"></script>
+</head>
+
+
+<body ng-app="jeuBC" >
+
+
+  <div class="body" ng-controller="BC_controlleur">
+    <div name="div_login" ng-show ="afficher_login">
+      <div ng-class="{barre:afficher, barre2:afficher2}"> {{msg}} </div>
+
+        <div class="grad"></div>
+        <div class="header">
+          <div>CERI<span> Game</span></div>
+        </div>
+		<br>
+		<form name="login" class="login"  ng-submit="login1()" >
+				<input type="text" placeholder="pseudo" name="pseudo" ng-model="username" required/><br>
+				<input type="password" placeholder="password" name="password" ng-model="password" required/><br>
+        <input type="submit" name="button1" value="Envoyer" />
+       <!-- <div ng-show="">Connexion Réussis</div>-->
+		</form>
+    </div>
+  </div>
+
+    <div name="quiz" ng-controller="BC_quiz_controlleur" >
+      <div ng-show="afficher_jeu">
+
+        <button ng-click="fquizz()">Quizz</button>
+
+        <div class="" ng-show="afficher_quiz">
+          <br>
+          <label for="theme-select">Choisir un thème:</label>
+          <select id="pet-select" ng-model="theme_choisi">
+            <option ng-repeat="theme in themes" value="{{theme}}">{{theme}}</option>
+          </select>
+          <br>
+          <label for="niveau">Choisir le niveau : </label>
+          <select name="niveau" id="niveau" ng-model="niveau_choisi">
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <button ng-click="jouer()">Jouer</button>
+        </div>
+
+        <div name="question_div" ng-show="afficher_question">
+          <div name="chrono">
+            <span name="heure" ng-bind="heure"></span>:
+            <span name="minute" ng-bind="minute"></span>:
+            <span name="seconde" ng-bind="seconde"></span>
+          </div>
+          <span name="score" ng-bind="score"></span>
+          <span name=question ng-bind="question"></span>
+
+          <div class="reponses_radio">
+            <div  ng-repeat="reponse in reponses">
+              <input type="radio" name="id_radio" ng-model="reponse_choisi" ng-click=" onClick(reponse,reponse_correct)" checked="false"> {{reponse}}
+            </div>
+          </div>
+        </div>
+
+        <div name="resultat" ng-show="afficher_resultat">
+          <h1>Quiz terminé !! Votre résultat et de : {{score}}</h1>
+        </div>
+
+      </div>
+    </div>
+
+
+  <!--      Profile        -->
+
+  <div ng-controller="BC_profile_controlleur" ng-show="afficher_profile">
+
+      <div class="text-center cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+           <header class="masthead mb-auto">
+             <div class="inner">
+               <h3 class="masthead-brand">Cover</h3>
+               <nav class="nav nav-masthead justify-content-center">
+                 <a class="nav-link active" href="#">Home</a>
+                 <a class="nav-link" href="#">Features</a>
+                 <a class="nav-link" href="#">Contact</a>
+               </nav>
+             </div>
+           </header>
+
+           <main role="main" class="inner cover">
+             <h1 class="cover-heading">Cover your page.</h1>
+             <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+             <p class="lead">
+               <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+             </p>
+           </main>
+
+           <footer class="mastfoot mt-auto">
+             <div class="inner">
+               <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+             </div>
+           </footer>
+           <div class="profil-container">
+                <img class="avatar" src="{{avatar}}" alt="avatar" />
+                <h1  class="nom" ng-bind="nom"></h1>
+                <p class="prenom" ng-bind="prenom"></p>
+                <label class="popo">date de naissance </label><p class="date" ng-bind="date_de_naissance"></p>
+                <label class="statut">Statut </label>
+                <label class="etat">Connecté </label>
+          </div>
+     </div>
+     </div>
+
+
+</body>
+
+</html>

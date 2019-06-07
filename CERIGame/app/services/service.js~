@@ -1,0 +1,73 @@
+// fichier services.js pour définir les services à associer au module dans app.js et à injecter dans le contrôleur si nécessaire
+/* service permettant d'accéder aux données par une requête HTTP */
+function accessDataService($http){
+/**
+* getInfo : la fonction getInfo retourne une promesse provenant du service http
+* @param url
+* @returns {*|Promise}
+*/
+     this.postinfo = function(url){
+
+       //Appel ajax
+       return $http.get(url,{'username':username,'password':pwd}).then(function(response){return(response.data);},function(reponse){return("WRONG");});
+     }
+}
+
+function treatSocket($rootScope) {
+     var socket = io.connect('http://pedago02a.univ-avignon.fr:3202/');
+     return {
+          on: function(eventName, callback){
+          socket.on(eventName, callback);
+          },
+          emit: function(eventName, data) {
+          socket.emit(eventName, data);
+          }
+     }
+}
+
+function sessionService($log){
+  // Instantiate data when service is loaded
+  this._user = JSON.parse(localStorage.getItem('session.user'));
+  this.getUser = function(){
+    return this._user;
+  };
+  this.setUser = function(user){
+    this._user = user;
+    localStorage.setItem('session.user', JSON.stringify(user));
+    return this;
+  }
+}
+
+function authService($http, session){
+  /**
+  * Check whether the user is logged in
+  * @returns boolean
+  */
+  this.isLoggedIn = function isLoggedIn(){
+    return session.getUser() !== null;
+  }
+  /**
+  * Log in
+  * @param credentials
+  * @returns {*|Promise}
+  */
+  this.logIn = function(username, password){
+  	console.log("Passage par service");
+    return $http.get('http://pedago02a.univ-avignon.fr:3202/', {'username':username, 'password': password}).then(function(response){
+         if(response.data.isConnected){
+           console.log('Connecté => status reponse:'+response.data.statusResp+' message: '+response.data.statusMsg+' objet:'+JSON.stringify(response.data.data));
+               }
+          else
+          console.log("Non Connecté");
+          },(err)=>{console.log("Erreur service");});
+     }
+  /**
+  * Log out : on peut se poser la question d'une requête HTTP ! pour faire le
+  ménage côté serveur ?!
+  * @returns {*|Promise}
+  */
+    this.logOut = function(){
+      return $http.get('http://pedago02a.univ-avignon.fr:3202/logout').then(function(response){
+      });
+    }
+}

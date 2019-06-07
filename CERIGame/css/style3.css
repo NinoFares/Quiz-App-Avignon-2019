@@ -1,0 +1,352 @@
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+body{
+	margin: 0;
+	padding: 0;
+	background: #777;
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	z-index: 0;
+}
+.grad{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: 1;
+	opacity: 0.7;
+}
+.header{
+	position: absolute;
+	top: calc(47% - 35px);
+	left: calc(45% - 255px);
+	z-index: 2;
+}
+.header div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 50px;
+	font-weight: 200;
+}
+.header div span{
+	color: #5379fa !important;
+}
+
+.barre{
+	z-index: 9999;
+    width: 100%;
+    background:#2F6900;
+    padding:8px 0;
+    text-align: center;
+    font-size:15px;
+    margin-top:20px;}
+
+ .barre2{
+    	z-index: 9999;
+        width: 100%;
+        background:#B42727;
+        padding:8px 0;
+        text-align: center;
+        font-size:15px;
+        margin-top:20px;}
+
+.login{
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 250px;
+	padding: 10px;
+	z-index: 2;
+}
+
+.login input[type=text]{
+	width: 400px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
+
+.login input[type=password]{
+	width: 400px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.login input[name=button1]{
+	width: 410px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+
+.login input[name=button1]:hover{
+	opacity: 0.8;
+}
+
+.login input[name=button1]:active{
+	opacity: 0.6;
+}
+
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[name=button1]:focus{
+	outline: none;
+}
+
+div[name=profile]{
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	height: 400px;
+	width: 550px;
+	padding: 50px;
+	color: black;
+}
+div[name=quiz]{
+	position: absolute;
+	top: 50px;
+	left: 400px;
+	height: 400px;
+	width: 550px;
+	padding: 50px;
+	color: black;
+}
+span[name=question]{
+	position: absolute;
+	margin-top: 15px;
+	text-align: center;
+}
+span[name=score]{
+	color:black;
+	size: 5px;
+	position: absolute;
+	top: 120px;
+	left: 220px;
+}
+span[name=compte_a_rebours]{
+	color:black;
+	size: 15px;
+	position: absolute;
+	top: 120px;
+	left: 240px;
+}
+.reponses_radio{
+	position: absolute;
+	height: 200px;
+	width: 200px;
+	top : 200px;
+	left: 250px;
+	text-align: center;
+}
+
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+.profil-container {
+    z-index: 2;
+    width: 20%;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+	background: rgb(160, 199, 199);
+	box-shadow: 4px 0px 8px rgba(119, 109, 109, 0.4);
+	display: flex;
+    flex-direction: column;
+	align-items: center;
+}
+/* Profile */
+.profil-container > .avatar {
+	width: 50%;
+	height: auto;
+    border-radius: 60%;
+    border-color: white;
+    border-style: solid;
+    border-width: 4px;
+	margin-top: 42px;
+	background: lightgray;
+}
+.profil-container > .nom {
+    font-size: 25px;
+    color: rgb(28, 44, 44);
+    position: relative;
+    top: 33px;
+    left: 00px
+}
+.profil-container > .prenom {
+	font-size: 25px;
+	color: #17202A;
+	top: 33px;
+    left: 00px;
+}
+.profil-container > .date {
+	font-size: 25px;
+	color: #17202A;
+}
+.profil-container > .statut{
+	color : rgb(25, 152, 161);
+}
+.profil-container > .etat{
+	color : green;
+	font-size: 25px;
+
+}
+
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: #333;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+.masthead {
+  margin-bottom: 2rem;
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
+  }
+  .nav-masthead {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
+
+
+/*
+ * Footer
+ */
+.mastfoot {
+  color: rgba(255, 255, 255, .5);
+}
