@@ -14,10 +14,10 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 /******** Declaration des variables ********/
-var   _dirname = '/home/nas02a/etudiants/inf/uapv1900550/squelette_MEAN_2018-2019/';
+var   _dirname = '/';
 const dsnMongoDB = "mongodb://127.0.0.1:27017/db";
 var   responseData = {};
-var pool = new pgClient.Pool({user:'uapv1800437',host:'pedago02a.univ-avignon.fr',database:'etd',password:'TXZcAN',port:'5432'});
+var pool = new pgClient.Pool({user:'root',host:'localhost',database:'etd',port:'5432'});
 
 /******** Configuration du serveur NodeJS - Port : 3202 *********/
 app.use(bodyParser.json({limit:'30mb'}));
